@@ -26,7 +26,7 @@ Structure project ini menggunakan referensi uncle bob clean code architecture, l
  <a href="https://drive.google.com/file/d/1wcT_ckxecOte550Vr5PyLorZcndqMiDC/view?usp=sharing" target="_blank"> <img src="https://i.ibb.co/Zgrhd5j/video-demo.jpg" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
 </p>
 <p align="center">
- <a href="#" target="_blank"> <img src="https://github.com/Supriyanto6543/my_nearby/assets/33416633/202df01a-44f7-4aed-a14b-6ba8d49c6c2f" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
+ <a href="#" target="_blank"> <img src="https://i.ibb.co/jGrc3G7/final-image.jpg" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
 </p>
 
 ## Download Demo Aplikasi
