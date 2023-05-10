@@ -28,3 +28,9 @@ Structure project ini menggunakan referensi uncle bob clean code architecture, l
 <p align="center">
  <a href="#" target="_blank"> <img src="https://github.com/Supriyanto6543/my_nearby/assets/33416633/202df01a-44f7-4aed-a14b-6ba8d49c6c2f" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
 </p>
+
+## Download Demo Aplikasi
+<p align="center">
+ <a href="https://drive.google.com/file/d/1zS5h7M2H44dh_5sg_69IpfqegtObC7LV/view?usp=share_link" target="_blank"> <img src="https://github.com/Supriyanto6543/my_nearby/assets/33416633/ee7425ff-9569-4aa3-992f-b92dfe8e1932" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
+</p>
+
