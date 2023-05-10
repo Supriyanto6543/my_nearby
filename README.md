@@ -22,4 +22,6 @@ Project ini dibuat menggunakan framework flutter dan dart, serta google api key 
 Structure project ini menggunakan referensi uncle bob clean code architecture, lebih jelasnya bisa langsung baca sumbernya disini: [Clean code concept by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ## Demo Aplikasi
-[<img src="[https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg](https://www.slashgear.com/img/gallery/google-maps-or-apple-maps-slashgear-survey-reveals-which-gps-app-people-prefer-to-use/intro-1662661170.jpg)" width="50%">](https://drive.google.com/file/d/1wcT_ckxecOte550Vr5PyLorZcndqMiDC/view?usp=sharing)
+<p align="center">
+ <a href="https://drive.google.com/file/d/1wcT_ckxecOte550Vr5PyLorZcndqMiDC/view?usp=sharing" target="_blank"> <img src="https://www.slashgear.com/img/gallery/google-maps-or-apple-maps-slashgear-survey-reveals-which-gps-app-people-prefer-to-use/intro-1662661170.jpg" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
+</p>
