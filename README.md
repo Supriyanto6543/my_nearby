@@ -23,7 +23,7 @@ Structure project ini menggunakan referensi uncle bob clean code architecture, l
 
 ## Demo Aplikasi
 <p align="center">
- <a href="https://drive.google.com/file/d/1wcT_ckxecOte550Vr5PyLorZcndqMiDC/view?usp=sharing" target="_blank"> <img src="https://www.slashgear.com/img/gallery/google-maps-or-apple-maps-slashgear-survey-reveals-which-gps-app-people-prefer-to-use/intro-1662661170.jpg" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
+ <a href="https://drive.google.com/file/d/1wcT_ckxecOte550Vr5PyLorZcndqMiDC/view?usp=sharing" target="_blank"> <img src="https://github.com/Supriyanto6543/my_nearby/assets/33416633/632e7a2b-c161-423c-8f23-705b1303a13f" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
 </p>
 <p align="center">
  <a href="#" target="_blank"> <img src="https://github.com/Supriyanto6543/my_nearby/assets/33416633/202df01a-44f7-4aed-a14b-6ba8d49c6c2f" alt="My Nearby" style="vertical-align:top; margin:4px"> </a>
