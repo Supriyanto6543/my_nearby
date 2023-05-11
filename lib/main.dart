@@ -9,10 +9,13 @@ import 'package:my_restaurant/features/presentation/account/bloc/account_place_c
 import 'package:my_restaurant/features/presentation/account/pages/add_place_page.dart';
 import 'package:my_restaurant/features/presentation/detail/pages/detail_page.dart';
 import 'package:my_restaurant/features/presentation/home/bloc/home_cubit.dart';
+import 'package:my_restaurant/features/presentation/home/bloc_state/home_bloc.dart';
 import 'package:my_restaurant/features/presentation/map_detail/bloc/map_cubit.dart';
+import 'package:my_restaurant/features/presentation/map_detail/bloc_state/map_bloc.dart';
 import 'package:my_restaurant/features/presentation/map_detail/pages/map_detail_page.dart';
 import 'package:my_restaurant/features/presentation/navigation/pages/bottom_bar.dart';
 import 'package:my_restaurant/features/presentation/offline/bloc/offline_cubit.dart';
+import 'package:my_restaurant/features/presentation/offline/bloc_state/offline_bloc.dart';
 import 'package:my_restaurant/features/presentation/search/bloc/search_cubit.dart';
 import 'package:my_restaurant/features/presentation/search/pages/search_page.dart';
 import 'package:my_restaurant/features/presentation/splash/bloc/splash_cubit.dart';
@@ -25,6 +28,9 @@ void main() async {
   di.init();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => SplashCubit()..checkingPermission()),
+    BlocProvider(create: (_) => di.locator<HomeBloc>()),
+    BlocProvider(create: (_) => di.locator<MapBloc>()),
+    BlocProvider(create: (_) => OfflineBloc()),
     BlocProvider(create: (_) => di.locator<HomeCubit>()),
     BlocProvider(create: (_) => di.locator<SearchCubit>()),
     BlocProvider(create: (_) => di.locator<MapCubit>()),

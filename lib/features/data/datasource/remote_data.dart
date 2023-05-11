@@ -26,6 +26,7 @@ class RestaurantRemoteDataImpl implements RestaurantRemoteData {
   Future<List<ResultModel>> getHomePage(
       String lat, String long, String type) async {
     // TODO: implement getHomePage
+    log("get url ${"$baseUrl${Constant.nearby}?${Constant.location}$lat"},$long${Constant.radius}$type${Constant.apiKey}");
     final request = await dio.get(
         '${"$baseUrl${Constant.nearby}?${Constant.location}$lat"},$long${Constant.radius}$type${Constant.apiKey}');
     List result = request.data['results'];

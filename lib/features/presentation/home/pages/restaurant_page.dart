@@ -7,27 +7,37 @@ import 'package:my_restaurant/common/custom_rating_bar.dart';
 import 'package:my_restaurant/common/routes.dart';
 import 'package:my_restaurant/extension/list_extension.dart';
 import 'package:my_restaurant/extension/sizebox_extension.dart';
-import 'package:my_restaurant/features/presentation/home/bloc/home_cubit.dart';
 import 'package:my_restaurant/features/presentation/navigation/pages/bottom_bar.dart';
-import 'package:my_restaurant/injection.dart' as di;
 
 import '../../../../common/common_shared.dart';
 import '../../../../common/custom_offline.dart';
 import '../../../../common/hex_color.dart';
+import '../bloc_state/home_bloc.dart';
 
-class RestaurantPage extends StatelessWidget {
-  const RestaurantPage({Key? key}) : super(key: key);
+class RestaurantPage extends StatefulWidget {
+  RestaurantPage({Key? key}) : super(key: key);
+
+  @override
+  State<RestaurantPage> createState() => _RestaurantPageState();
+}
+
+class _RestaurantPageState extends State<RestaurantPage> {
+  final HomeBloc homeBloc = HomeBloc();
+  final position = CommonShared.getCurPos;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeBloc.add(HomeEventList(position != null ? position![0] : '',
+        position != null ? position![1] : '', 'restaurant'));
+  }
 
   @override
   Widget build(BuildContext context) {
-    final position = CommonShared.getCurPos;
-    String lat = position != null ? position[0] : '';
-    String long = position != null ? position[1] : '';
-
     return BlocProvider(
-      create: (context) =>
-          di.locator<HomeCubit>()..fetchHomePage(lat, long, type: 'restaurant'),
-      child: BlocBuilder<HomeCubit, HomeState>(
+      create: (context) => homeBloc,
+      child: BlocBuilder<HomeBloc, HomeBlocState>(
         builder: (context, state) {
           return NestedScrollView(
               floatHeaderSlivers: false,
@@ -53,13 +63,13 @@ class RestaurantPage extends StatelessWidget {
                   )
                 ];
               },
-              body: state is HomeInitial
+              body: state is HomeBlocInitial
                   ? Center(
                       child: SizedBox(
                           height: 30.sp,
                           width: 30.sp,
                           child: CircularProgressIndicator()))
-                  : state is HomeLoaded
+                  : state is HomeBlocLoaded
                       ? SingleChildScrollView(
                           child: Column(
                             children: [
@@ -155,13 +165,15 @@ class RestaurantPage extends StatelessWidget {
                             ],
                           ),
                         )
-                      : state is HomeError
+                      : state is HomeBlocError
                           ? Center(
                               child: CustomOffline(
                                 refresh: () {
-                                  context.read<HomeCubit>().fetchHomePage(
-                                      lat, long,
-                                      type: 'restaurant');
+                                  BlocProvider.of<HomeBloc>(context).add(
+                                      HomeEventList(
+                                          position != null ? position![0] : '',
+                                          position != null ? position![1] : '',
+                                          'restaurant'));
                                 },
                               ),
                             )

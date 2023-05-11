@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:my_restaurant/common/hex_color.dart';
 import 'package:my_restaurant/extension/sizebox_extension.dart';
-import 'package:my_restaurant/features/presentation/map_detail/bloc/map_cubit.dart';
-import 'package:my_restaurant/injection.dart' as di;
+import 'package:my_restaurant/features/presentation/map_detail/bloc_state/map_bloc.dart';
 
 import '../../../../common/common_shared.dart';
 
@@ -24,6 +23,19 @@ class MapDetailPage extends StatefulWidget {
 class _MapDetailPageState extends State<MapDetailPage> {
   GoogleMapController? _controller;
   Set<Marker> marker = {};
+  final position = CommonShared.getCurPos;
+  final MapBloc mapBloc = MapBloc();
+  CameraPosition? cameraPos;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mapBloc.add(MapEventList(
+        LatLng(double.tryParse(position != null ? position![0] : '')!,
+            double.tryParse(position != null ? position![1] : '')!),
+        LatLng(widget.dis.latitude, widget.dis.longitude)));
+  }
 
   @override
   void dispose() {
@@ -33,18 +45,14 @@ class _MapDetailPageState extends State<MapDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final position = CommonShared.getCurPos;
-    String lat = position != null ? position[0] : '';
-    String long = position != null ? position[1] : '';
-    final cameraPos = CameraPosition(
-        target: LatLng(double.tryParse(lat)!, double.tryParse(long)!),
+    cameraPos = CameraPosition(
+        target: LatLng(double.tryParse(position != null ? position![0] : '')!,
+            double.tryParse(position != null ? position![1] : '')!),
         zoom: 13.5);
     return BlocProvider(
-      create: (_) => di.locator<MapCubit>()
-        ..fetchDirection(LatLng(double.tryParse(lat)!, double.tryParse(long)!),
-            LatLng(widget.dis.latitude, widget.dis.longitude)),
-      child: BlocBuilder<MapCubit, MapState>(builder: (_, state) {
-        if (state is MapLoaded) {
+      create: (_) => mapBloc,
+      child: BlocBuilder<MapBloc, MapBlocState>(builder: (_, state) {
+        if (state is MapBlocLoaded) {
           PolylinePoints()
               .decodePolyline(state.direction[0].overviewPolyline.points)
               .map((e) {
@@ -61,10 +69,10 @@ class _MapDetailPageState extends State<MapDetailPage> {
               GoogleMap(
                 myLocationButtonEnabled: false,
                 zoomControlsEnabled: false,
-                initialCameraPosition: cameraPos,
+                initialCameraPosition: cameraPos!,
                 markers: marker,
                 polylines: {
-                  if (state is MapLoaded)
+                  if (state is MapBlocLoaded)
                     Polyline(
                         polylineId: const PolylineId('overview_polyline'),
                         color: Colors.red,
@@ -78,7 +86,7 @@ class _MapDetailPageState extends State<MapDetailPage> {
                 },
                 onMapCreated: (controller) => _controller = controller,
               ),
-              if (state is MapLoaded)
+              if (state is MapBlocLoaded)
                 if (state.direction.isNotEmpty)
                   Positioned(
                     top: kToolbarHeight,
@@ -141,7 +149,7 @@ class _MapDetailPageState extends State<MapDetailPage> {
             backgroundColor: getColorFromHex(bgColorApp),
             foregroundColor: Colors.white,
             onPressed: () => _controller!
-                .animateCamera(CameraUpdate.newCameraPosition(cameraPos)),
+                .animateCamera(CameraUpdate.newCameraPosition(cameraPos!)),
             child: Icon(Icons.center_focus_strong),
           ),
         );

@@ -9,19 +9,32 @@ import 'package:my_restaurant/extension/sizebox_extension.dart';
 import 'package:my_restaurant/features/data/model/geometry_model.dart';
 import 'package:my_restaurant/features/data/model/location_model.dart';
 import 'package:my_restaurant/features/domain/entities/result_entity.dart';
-import 'package:my_restaurant/features/presentation/offline/bloc/offline_cubit.dart';
-import 'package:my_restaurant/injection.dart' as di;
+import 'package:my_restaurant/features/presentation/offline/bloc_state/offline_bloc.dart';
 
 import '../../../../common/custom_rating_bar.dart';
 
-class OfflinePage extends StatelessWidget {
+class OfflinePage extends StatefulWidget {
   const OfflinePage({Key? key}) : super(key: key);
+
+  @override
+  State<OfflinePage> createState() => _OfflinePageState();
+}
+
+class _OfflinePageState extends State<OfflinePage> {
+  final OfflineBloc offlineBloc = OfflineBloc();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    offlineBloc.add(OfflineEventList());
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di.locator<OfflineCubit>()..fetchOfflineData(),
-      child: BlocBuilder<OfflineCubit, OfflineState>(
+      create: (_) => offlineBloc,
+      child: BlocBuilder<OfflineBloc, OfflineBlocState>(
         builder: (_, state) {
           return Scaffold(
               appBar: AppBar(
@@ -33,18 +46,18 @@ class OfflinePage extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   subtitle: Text(
-                    'Terakhir diperbarui: ${state is OfflineLoaded ? state.list![0].dateUpdate!.split('.').first : ''}',
+                    'Terakhir diperbarui: ${state is OfflineBlocLoaded ? state.list![0].dateUpdate!.split('.').first : ''}',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              body: state is OfflineInitial
+              body: state is OfflineBlocInitial
                   ? Center(
                       child: SizedBox(
                           height: 30.sp,
                           width: 30.sp,
                           child: CircularProgressIndicator()))
-                  : state is OfflineLoaded
+                  : state is OfflineBlocLoaded
                       ? SingleChildScrollView(
                           child: Column(
                             children: [
